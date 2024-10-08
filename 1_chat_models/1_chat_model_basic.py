@@ -4,11 +4,8 @@
 import os
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
-
-# Load environment variables from .env
-load_dotenv()
-
-# making changes
+from config import set_environment
+set_environment()
 
 # Create a ChatOpenAI model
 model = ChatOpenAI(model="gpt-4o")
