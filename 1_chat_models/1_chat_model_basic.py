@@ -8,9 +8,6 @@ from langchain_openai import ChatOpenAI
 # Load environment variables from .env
 load_dotenv()
 
-# # Debug: Print the API key to ensure it's loaded correctly
-# print(os.getenv("OPENAI_API_KEY"))
-
 # Create a ChatOpenAI model
 model = ChatOpenAI(model="gpt-4o")
 
