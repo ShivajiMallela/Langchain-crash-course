@@ -8,6 +8,8 @@ from langchain_openai import ChatOpenAI
 # Load environment variables from .env
 load_dotenv()
 
+# making changes
+
 # Create a ChatOpenAI model
 model = ChatOpenAI(model="gpt-4o")
 
