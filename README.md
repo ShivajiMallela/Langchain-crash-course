@@ -116,4 +116,4 @@ Learn about agents, how they work, and how to build custom tools to enhance thei
 
 ## Acknowledgements
 
-I would like to express my gratitude to [**Brandon Hancock**](https://github.com/bhancockio), for providing the foundational codebase and learning resources that greatly facilitated my understanding and engagement with the project material. This repository is a fork of [langchain-crash-course][link-to-original-repo](https://github.com/bhancockio/langchain-crash-course) and includes modifications and extensions made by me as part of my learning process.
+I would like to express my gratitude to [**Brandon Hancock**](https://github.com/bhancockio), for providing the foundational codebase and learning resources that greatly facilitated my understanding and engagement with the project material. This repository is a fork of [langchain-crash-course](https://github.com/bhancockio/langchain-crash-course) and includes modifications and extensions made by me as part of my learning process.
