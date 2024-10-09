@@ -1,6 +1,5 @@
 # Example Source: https://python.langchain.com/v0.2/docs/integrations/memory/google_firestore/
 
-from dotenv import load_dotenv
 from google.cloud import firestore
 from langchain_google_firestore import FirestoreChatMessageHistory
 from langchain_openai import ChatOpenAI
@@ -20,40 +19,42 @@ Steps to replicate this example:
     - https://console.cloud.google.com/apis/enableflow?apiid=firestore.googleapis.com&project=crewai-automation
 """
 
-load_dotenv()
+from config import set_environment
+set_environment()
 
-# Setup Firebase Firestore
-PROJECT_ID = "langchain-demo-abf48"
-SESSION_ID = "user_session_new"  # This could be a username or a unique ID
+# set Firebase Firestore
+PROJECT_ID = "langchain-tutorials-dabf9"
+SESSION_ID = "session_1"
 COLLECTION_NAME = "chat_history"
 
-# Initialize Firestore Client
-print("Initializing Firestore Client...")
+# initialize the Firestore client
+print("Initializing the Firestore client..")
 client = firestore.Client(project=PROJECT_ID)
 
-# Initialize Firestore Chat Message History
-print("Initializing Firestore Chat Message History...")
+#Initialize Firestore chat message history
+print(f"Initializing Firestore chat message history....")
 chat_history = FirestoreChatMessageHistory(
     session_id=SESSION_ID,
     collection=COLLECTION_NAME,
-    client=client,
+    client=client
 )
-print("Chat History Initialized.")
-print("Current Chat History:", chat_history.messages)
 
-# Initialize Chat Model
-model = ChatOpenAI()
+print(f'Chat History Initialized.')
+print(f'current chat history:', chat_history.messages)
 
-print("Start chatting with the AI. Type 'exit' to quit.")
+# Initialize the chat model
+model = ChatOpenAI(model='gpt-4o')
+
+print(f"Start chatting with the AI. Type 'exit' to quit.")
 
 while True:
-    human_input = input("User: ")
-    if human_input.lower() == "exit":
+    user_input = input('You: ')
+    if user_input.lower() == 'exit':
         break
 
-    chat_history.add_user_message(human_input)
+    chat_history.add_user_message(user_input)
 
     ai_response = model.invoke(chat_history.messages)
-    chat_history.add_ai_message(ai_response.content)
+    chat_history.add_ai_message(ai_response.content) # type: ignore
 
-    print(f"AI: {ai_response.content}")
+    print(f'AI: {ai_response.content}')
