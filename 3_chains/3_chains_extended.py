@@ -1,14 +1,11 @@
-from dotenv import load_dotenv
 from langchain.prompts import ChatPromptTemplate
 from langchain.schema.output_parser import StrOutputParser
-from langchain.schema.runnable import RunnableLambda
 from langchain_openai import ChatOpenAI
+from langchain.schema.runnable import RunnableLambda
+from config import set_environment
+set_environment()
 
-# Load environment variables from .env
-load_dotenv()
-
-# Create a ChatOpenAI model
-model = ChatOpenAI(model="gpt-4o")
+model = ChatOpenAI(model='gpt-4o')
 
 # Define prompt templates
 prompt_template = ChatPromptTemplate.from_messages(
@@ -18,15 +15,13 @@ prompt_template = ChatPromptTemplate.from_messages(
     ]
 )
 
-# Define additional processing steps using RunnableLambda
-uppercase_output = RunnableLambda(lambda x: x.upper())
-count_words = RunnableLambda(lambda x: f"Word count: {len(x.split())}\n{x}")
+# define additional processing steps using runnable lambda
+uppercase_output = RunnableLambda(lambda x: x.upper()) # type: ignore
+count_words = RunnableLambda(lambda x: f"Word count: {len(x.split())}\n{x}") # type: ignore
 
-# Create the combined chain using LangChain Expression Language (LCEL)
 chain = prompt_template | model | StrOutputParser() | uppercase_output | count_words
 
-# Run the chain
-result = chain.invoke({"topic": "lawyers", "joke_count": 3})
+result = chain.invoke({'topic':'animals',
+                       'joke_count': 3})
 
-# Output
 print(result)

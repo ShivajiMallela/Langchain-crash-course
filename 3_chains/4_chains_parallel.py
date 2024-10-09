@@ -1,11 +1,10 @@
-from dotenv import load_dotenv
-from langchain.prompts import ChatPromptTemplate
-from langchain.schema.output_parser import StrOutputParser
-from langchain.schema.runnable import RunnableParallel, RunnableLambda
 from langchain_openai import ChatOpenAI
+from langchain.schema.runnable import RunnableParallel, RunnableLambda
+from langchain.schema.output_parser import StrOutputParser
+from langchain.prompts import ChatPromptTemplate
 
-# Load environment variables from .env
-load_dotenv()
+from config import set_environment
+set_environment()
 
 # Create a ChatOpenAI model
 model = ChatOpenAI(model="gpt-4o")
@@ -67,11 +66,12 @@ chain = (
     | model
     | StrOutputParser()
     | RunnableParallel(branches={"pros": pros_branch_chain, "cons": cons_branch_chain})
-    | RunnableLambda(lambda x: combine_pros_cons(x["branches"]["pros"], x["branches"]["cons"]))
+    | RunnableLambda(lambda x: combine_pros_cons(x["branches"]["pros"], # type: ignore
+                                                 x["branches"]["cons"])) # type: ignore
 )
 
 # Run the chain
-result = chain.invoke({"product_name": "MacBook Pro"})
+result = chain.invoke({"product_name": "Iphone"})
 
 # Output
 print(result)

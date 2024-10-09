@@ -2,3 +2,4 @@
 db/
 1_chat_models/config.py
 2_prompt_templates/config.py
+3_chains/config.py
