@@ -1,3 +1,9 @@
+"""
+This code is to store the custom document in Chroma vector store.
+After executing this code, the document is stored locally in Chroma vector store (this is also locally stored).s
+"""
+
+
 import os
 from langchain_community.document_loaders import TextLoader
 from langchain.text_splitter import CharacterTextSplitter
@@ -32,7 +38,7 @@ if not os.path.exists(persistent_dir):
 
     # Display info about split docs
     print("\n--Creating Embeddings--\n")
-    embeddings = OpenAIEmbeddings(model='text_embedding-3-small')
+    embeddings = OpenAIEmbeddings(model='text-embedding-3-small')
     print(f"\n--Finished creating Embeddings--")
 
     print(f"\n--Creating vector store---")
