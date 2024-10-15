@@ -4,3 +4,5 @@ db/
 2_prompt_templates/config.py
 3_chains/config.py
 4_rag/config.py
+__pycache__/
+5_agents_and_tools/agent_deep_dive/config.py
