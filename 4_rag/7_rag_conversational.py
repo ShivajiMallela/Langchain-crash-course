@@ -6,6 +6,7 @@ from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 import streamlit as st
+from langchain_community.llms import Ollama
 
 from config import set_environment
 set_environment()
@@ -28,6 +29,9 @@ retriever = db.as_retriever(
 
 # create a ChatOpenAI model
 llm = ChatOpenAI(model='gpt-4o')
+
+# Create an alternate model using Ollama
+# llm = Ollama(model='mistral') # you need to have downloaded model in your local storage in order to run Ollama models
 
 # contextualize question prompt
 # This prompt helps AI understand that it has to make a standalone question (that is independent of other information) for the user's query
@@ -64,7 +68,8 @@ qa_system_prompt = (
     """
     You are an assistant for question-answering tasks.
     use the following pieces of retrieved context to answer the question.
-    If you don't know the answer, just say that you don't know. 
+    If you don't find the answer in the context, just use your own knowledge
+    and provide answer saying 'I can't find answer in the documents so i'm generating on my knowledge and generate answer....'. 
     Use three sentences maximum and keep the answer concise. \n\n {context}
     """
 )
