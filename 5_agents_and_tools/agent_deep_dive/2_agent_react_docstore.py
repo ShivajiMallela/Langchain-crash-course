@@ -126,7 +126,7 @@ agent = create_react_agent(
 )
 
 agent_executor = AgentExecutor.from_agent_and_tools(
-    agent=agent, tools=tools, handle_parsing_errors=True, verbose=True,
+    agent=agent, tools=tools, handle_parsing_errors=True, verbose=True, # type: ignore
 )
 
 chat_history = []
